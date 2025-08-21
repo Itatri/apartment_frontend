@@ -1,0 +1,42 @@
+     <h2>Danh sách phòng</h2>
+
+    <form (ngSubmit)="addRoom()">
+      <input [(ngModel)]="newRoom.name" name="name" placeholder="Tên phòng" required>
+      <input [(ngModel)]="newRoom.price" name="price" placeholder="Giá thuê" type="number" required>
+      <select [(ngModel)]="newRoom.status" name="status">
+        <option value="available">Available</option>
+        <option value="rented">Rented</option>
+      </select>
+      <button type="submit">Thêm</button>
+    </form>
+
+   <table border="1" width="100%" style="margin-top: 20px;">
+  <thead>
+    <tr>
+      <th>Tên phòng</th>
+      <th>Giá</th>
+      <th>Trạng thái</th>
+      <th>Hành động</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let room of rooms">
+      <td>
+        <input [(ngModel)]="room.name" name="name{{room._id}}">
+      </td>
+      <td>
+        <input [(ngModel)]="room.price" type="number" name="price{{room._id}}">
+      </td>
+      <td>
+        <select [(ngModel)]="room.status" name="status{{room._id}}">
+          <option value="available">Available</option>
+          <option value="rented">Rented</option>
+        </select>
+      </td>
+      <td>
+        <button (click)="updateRoom(room)">Lưu</button>
+        <button (click)="deleteRoom(room._id!)">Xóa</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
