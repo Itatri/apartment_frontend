@@ -1,31 +1,30 @@
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import e from 'express';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable({ providedIn: 'root' })
 export class TenantService {
-    private baseUrl = "http://localhost:5000/api/tenants";
+  private apiUrl = 'http://localhost:5000/api/tenants';
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-    getAll(): Observable<any>{
-        return this.http.get(`${this.baseUrl}`);
-    }
+  getTenants(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
 
-    create(data: FormData): Observable<any> {
-        return this.http.post(`${this.baseUrl}`, data);
-    }
+  getTenant(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
 
-    update(id: string, data: FormData): Observable<any> {
-        return this.http.put(`${this.baseUrl}/${id}`, data);
-    }
+  addTenant(formData: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, formData);
+  }
 
-    delete(id: string): Observable<any> {
-        return this.http.delete(`${this.baseUrl}/${id}`);
-    }
+  updateTenant(id: string, formData: FormData): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, formData);
+  }
 
+  deleteTenant(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }
