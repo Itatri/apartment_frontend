@@ -1,0 +1,23 @@
+ <h2>Danh sách hóa đơn</h2>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th>Phòng</th>
+        <th>Khách thuê</th>
+        <th>Từ ngày</th>
+        <th>Đến ngày</th>
+        <th>Tổng tiền</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+      </tr>
+      <tr *ngFor="let invoice of invoices">
+        <td>{{ invoice.roomId?.name }}</td>
+        <td>{{ invoice.tenantId?.name }}</td>
+        <td>{{ invoice.startDate | date }}</td>
+        <td>{{ invoice.endDate | date }}</td>
+        <td>{{ invoice.totalAmount | currency:'VND' }}</td>
+        <td>{{ invoice.status }}</td>
+        <td>
+          <button (click)="deleteInvoice(invoice._id)">Xóa</button>
+        </td>
+      </tr>
+    </table>
